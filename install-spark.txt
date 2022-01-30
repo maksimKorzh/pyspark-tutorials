@@ -1,0 +1,78 @@
+# Spark installation guide
+https://phoenixnap.com/kb/install-spark-on-ubuntu
+
+# install dependencies
+sudo apt install default-jdk scala git -y
+
+# verify dependencies
+java -version; javac -version; scala -version; git --version
+
+# download Spark
+wget https://downloads.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop2.7.tgz
+
+# extrct files
+tar xvf spark-*
+
+# move Spark to /opt/spark
+sudo mv spark-3.2.1-bin-hadoop2.7 /opt/spark
+
+# configure environmental variables (in editor)
+nano .profile
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+export PYSPARK_PYTHON=/usr/bin/python3
+
+# load profile
+source ~/.profile
+
+# start master server
+start-master.sh
+
+# web UI
+http://127.0.0.1:8080/
+
+# start slave server
+start-worker.sh -c 1 -m 512M spark://maksim-Inspiron-3582:7077
+
+# To remove warnings: in the spark directory execute
+cp conf/log4j.properties.template conf/log4j.properties
+
+# scala spark shell
+spark-shell
+
+# invoke pyspark shell
+pyspark
+
+# disable warnings by installing Java 8 instead of Java 11 (optional)
+sudo apt-get install openjdk-8-jre
+sudo update-alternatives --config java
+
+# stop master server
+stop-master.sh
+
+# stop running worker
+stop-worker.sh
+
+# start both master and server instances
+start-all.sh
+
+# stop all instances
+stop-all.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
