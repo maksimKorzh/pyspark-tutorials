@@ -34,7 +34,7 @@ http://127.0.0.1:8080/
 # start slave server
 start-worker.sh -c 1 -m 512M spark://maksim-Inspiron-3582:7077
 
-# To remove warnings: in the spark directory execute
+# To remove warnings: in the spark directory execute and edit properties file
 cp conf/log4j.properties.template conf/log4j.properties
 
 # scala spark shell
